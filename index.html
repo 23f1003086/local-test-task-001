@@ -8,36 +8,39 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             background-color: #f4f4f4;
         }
-        h1 {
-            margin-bottom: 20px;
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input {
-            margin: 5px;
+        input[type="number"] {
+            width: 100%;
             padding: 10px;
-            width: 100px;
+            margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
         button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
             background-color: #28a745;
             color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
             background-color: #218838;
         }
-        #result {
+        .result {
             margin-top: 20px;
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
         .error {
             color: red;
@@ -45,26 +48,27 @@
     </style>
 </head>
 <body>
-    <h1>Simple Calculator</h1>
-    <input type="number" id="num1" placeholder="First Number" />
-    <input type="number" id="num2" placeholder="Second Number" />
-    <button onclick="addNumbers()">Add</button>
-    <div id="result"></div>
-
+    <div class="calculator">
+        <h2>Simple Calculator</h2>
+        <input type="number" id="num1" placeholder="Enter first number" />
+        <input type="number" id="num2" placeholder="Enter second number" />
+        <button onclick="addNumbers()">Add</button>
+        <div class="result" id="result"></div>
+    </div>
     <script>
         function addNumbers() {
             const num1 = parseFloat(document.getElementById('num1').value);
             const num2 = parseFloat(document.getElementById('num2').value);
             const resultDiv = document.getElementById('result');
-            resultDiv.classList.remove('error');
+            resultDiv.innerHTML = ''; // Clear previous result
 
             if (isNaN(num1) || isNaN(num2)) {
-                resultDiv.textContent = 'Please enter valid numbers.';
-                resultDiv.classList.add('error');
-            } else {
-                const sum = num1 + num2;
-                resultDiv.textContent = `Result: ${sum}`;
+                resultDiv.innerHTML = '<span class="error">Please enter valid numbers.</span>';
+                return;
             }
+
+            const sum = num1 + num2;
+            resultDiv.innerHTML = `Result: ${sum}`;
         }
     </script>
 </body>
