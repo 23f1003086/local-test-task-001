@@ -54,26 +54,21 @@
         <input type="number" id="num2" placeholder="Enter second number" />
         <button onclick="addNumbers()">Add</button>
         <div class="result" id="result"></div>
-        <div class="error" id="error"></div>
     </div>
-
     <script>
         function addNumbers() {
-            const num1 = document.getElementById('num1').value;
-            const num2 = document.getElementById('num2').value;
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
             const resultDiv = document.getElementById('result');
-            const errorDiv = document.getElementById('error');
+            resultDiv.innerHTML = ''; // Clear previous result
 
-            resultDiv.textContent = '';
-            errorDiv.textContent = '';
-
-            if (num1 === '' || num2 === '') {
-                errorDiv.textContent = 'Please enter both numbers.';
+            if (isNaN(num1) || isNaN(num2)) {
+                resultDiv.innerHTML = '<span class="error">Please enter valid numbers.</span>';
                 return;
             }
 
-            const sum = parseFloat(num1) + parseFloat(num2);
-            resultDiv.textContent = `Result: ${sum}`;
+            const sum = num1 + num2;
+            resultDiv.innerHTML = `Result: ${sum}`;
         }
     </script>
 </body>
